@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Livros</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light text-dark">
+  <div class="container mt-4">
+    
+    <!-- Cabeçalho com botão de logout -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="text-danger">Catálogo de Livros - Community</h1>
+      <a href="/usuarios" class="btn btn-outline-danger">Logout</a>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <a href="/livros" class="btn btn-danger">Adicionar/Excluir Livro</a>
+    </div>
+
+    <div class="row">
+      <% if (livros.length > 0) { %>
+        <% livros.forEach(livro => { %>
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card shadow-sm border <% if (livro.destaque) { %> border-warning <% } %>">
+              <% if (livro.imagem) { %>
+                <img src="<%= livro.imagem %>" alt="<%= livro.titulo %>" class="card-img-top" style="height: 200px; object-fit: cover;">
+              <% } %>
+              <div class="card-body text-center">
+                <h5 class="card-title text-danger"><%= livro.titulo %></h5>
+                
+                <!-- Etiqueta de destaque -->
+                <% if (livro.destaque) { %>
+                  <span class="badge bg-warning text-dark">Destaque</span>
+                <% } else { %>
+                  <span class="badge bg-secondary text-white">Padrão</span>
+                <% } %>
+
+                <p class="card-text mt-2">Autor: <%= livro.autor %><br>Ano: <%= livro.ano %></p>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p class="text-center">Nenhum livro disponível.</p>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
